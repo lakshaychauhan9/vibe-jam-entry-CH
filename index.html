@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cosmic Hunt</title>
+    <title>Cosmic Hunter</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
       rel="stylesheet"
@@ -138,6 +138,24 @@
         top: 9px;
         left: 0;
       }
+      #toast {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        color: #66ccff;
+        text-shadow: 0 0 10px #66ccff, 0 0 20px #ff99ff, 0 0 30px #33ff99;
+        animation: pulsate 2s infinite;
+        text-align: center;
+        z-index: 150;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #66ccff;
+        box-shadow: 0 0 20px #66ccff;
+      }
     </style>
   </head>
   <body>
@@ -168,6 +186,11 @@
     </div>
     <div id="points-popup" class="points-popup"></div>
     <div id="crosshair"></div>
+    <div id="toast">
+      USE || ' W A S D ' for movement<br />
+      || ' I J K L '' for camera<br />
+      ||Click to shoot
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="main.js"></script>

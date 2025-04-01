@@ -1478,6 +1478,13 @@ function animate() {
   renderer.render(scene, camera);
 }
 
+setTimeout(() => {
+  const toast = document.getElementById("toast");
+  if (toast) {
+    toast.remove();
+  }
+}, 3000); // Remove after 5 seconds
+
 function updateGameTime() {
   if (gameOver) return;
 
@@ -1701,7 +1708,7 @@ function updateLaser() {
         scene.remove(planetGroup);
         planets.splice(planets.indexOf(planetGroup), 1);
         const explosionColor =
-          planet.userData.material.uniforms.uBaseColor.value;
+          planet.userData.material.uniforms?.uBaseColor.value;
         createExplosion(
           planetGroup.position,
           explosionColor,
