@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cosmic Hunt</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+      }
+      #ui {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+      }
+      .glowy-text {
+        font-family: "Orbitron", sans-serif;
+        font-size: 28px;
+        color: #66ccff;
+        text-shadow: 0 0 10px #66ccff, 0 0 20px #ff99ff, 0 0 30px #33ff99;
+        animation: pulsate 2s infinite;
+      }
+      @keyframes pulsate {
+        0% {
+          text-shadow: 0 0 10px #66ccff, 0 0 20px #ff99ff, 0 0 30px #33ff99;
+        }
+        50% {
+          text-shadow: 0 0 20px #66ccff, 0 0 30px #ff99ff, 0 0 40px #33ff99;
+        }
+        100% {
+          text-shadow: 0 0 10px #66ccff, 0 0 20px #ff99ff, 0 0 30px #33ff99;
+        }
+      }
+      #game-over {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+      }
+      .game-over-content {
+        text-align: center;
+      }
+      .game-over-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+      .game-over-content p {
+        font-size: 32px;
+        margin-bottom: 30px;
+      }
+      .glowy-button {
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        padding: 10px 30px;
+        background: none;
+        border: 2px solid #66ccff;
+        color: #66ccff;
+        text-shadow: 0 0 10px #66ccff;
+        box-shadow: 0 0 20px #66ccff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: button-pulsate 2s infinite;
+      }
+      .glowy-button:hover {
+        background: #66ccff;
+        color: #000;
+        text-shadow: none;
+        box-shadow: 0 0 30px #66ccff;
+      }
+      @keyframes button-pulsate {
+        0% {
+          box-shadow: 0 0 20px #66ccff;
+        }
+        50% {
+          box-shadow: 0 0 30px #66ccff;
+        }
+        100% {
+          box-shadow: 0 0 20px #66ccff;
+        }
+      }
+      .points-popup {
+        position: absolute;
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        color: #ffffff;
+        pointer-events: none;
+        z-index: 100;
+        animation: float 1s ease-out forwards;
+        text-shadow: 0 0 10px #66ccff, 0 0 20px #ff99ff;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+      }
+      #crosshair {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+        z-index: 150;
+        pointer-events: none;
+      }
+      #crosshair::before,
+      #crosshair::after {
+        content: "";
+        position: absolute;
+        background: #66ccff;
+        box-shadow: 0 0 5px #66ccff, 0 0 10px #ff99ff;
+      }
+      #crosshair::before {
+        width: 2px;
+        height: 20px;
+        top: 0;
+        left: 9px;
+      }
+      #crosshair::after {
+        width: 20px;
+        height: 2px;
+        top: 9px;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ui">
+      <div id="score" class="glowy-text">Score: 0</div>
+      <div id="timer" class="glowy-text">Time: 05:00</div>
+    </div>
+    <div id="points-popup" class="points-popup"></div>
+    <div id="crosshair"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
