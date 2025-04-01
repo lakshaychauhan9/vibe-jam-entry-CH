@@ -1032,6 +1032,8 @@ function setupUI() {
   document.body.appendChild(gameOverElement);
 }
 
+// code for portal
+
 // ====================================
 // EVENT HANDLERS
 // ====================================
@@ -1231,38 +1233,51 @@ function createEnhancedLaserBeam(mouseX, mouseY) {
 
 function endGame() {
   gameOver = true;
-  laserActive = false; // Stop laser
+  laserActive = false;
   if (laser) {
     scene.remove(laser);
     if (laser.userData.glow) scene.remove(laser.userData.glow);
     laser = null;
   }
 
-  // Create game over screen
   const gameOverScreen = document.createElement("div");
   gameOverScreen.id = "game-over";
   gameOverScreen.innerHTML = `
     <div class="game-over-content">
       <h1 class="glowy-text">Game Over!</h1>
-      <p class="glowy-text">Final Score: ${score}</p>
+      <p class="glowy-text">Final Score: ${score || 0}</p>
       <button id="restart-button" class="glowy-button">Restart</button>
     </div>
   `;
   document.body.appendChild(gameOverScreen);
 
-  // Add restart functionality
   document.getElementById("restart-button").addEventListener("click", () => {
+    // Reset game state
     gameOver = false;
     gameTime = 0;
     score = 0;
-    document.getElementById("score").textContent = `Score: ${score}`;
-    document.getElementById("timer").textContent = `Time: 05:00`;
-    gameOverScreen.remove();
-
+    laserActive = false;
+    cooldownTime = 0;
+    laserTime = 0;
+    if (laser) {
+      scene.remove(laser);
+      if (laser.userData.glow) scene.remove(laser.userData.glow);
+      laser = null;
+    }
+    // Reset avatar position (if applicable)
+    if (avatar) {
+      avatar.position.set(0, 0, 0);
+    }
     // Reset planets
     planets.forEach((planetGroup) => scene.remove(planetGroup));
     planets = [];
     createPlanets();
+    document.getElementById("score").textContent = `Score: ${score}`;
+    document.getElementById("timer").textContent = `Time: 05:00`;
+    gameOverScreen.remove();
+
+    // Restart the animation loop
+    animate();
   });
 }
 
